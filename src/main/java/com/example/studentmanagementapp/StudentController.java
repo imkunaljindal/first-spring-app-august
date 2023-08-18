@@ -1,35 +1,36 @@
 package com.example.studentmanagementapp;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/student")
 public class StudentController {
 
-    Map<Integer,Student> db = new HashMap<>();
+    @Autowired
+    StudentService studentService;
 
     @GetMapping("/get")
     public Student getStudent(@RequestParam("q") int regNo){
-        return db.get(regNo);
+        return studentService.getStudent(regNo);
     }
 
     @PostMapping("/add")
     public String addStudent(@RequestBody Student student){
-        db.put(student.getRegNo(),student);
-        return "Student has been added successfully";
+        return studentService.addStudent(student);
     }
 
     @GetMapping("/getByPath/{id}")
     public Student getStudentUsingPath(@PathVariable("id") int regNo){
-        return db.get(regNo);
+        return studentService.getStudentUsingPath(regNo);
     }
 
     @PutMapping("/update-age")
     public Student updateAge(@RequestParam("id") int regNo, @RequestParam("age") int newAge){
-        db.get(regNo).setAge(newAge);
-        return db.get(regNo);
+       return studentService.updateAge(regNo,newAge);
     }
 
     // delete a student  --> request param
