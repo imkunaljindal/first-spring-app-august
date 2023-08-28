@@ -1,9 +1,10 @@
 package com.example.studentmanagementapp;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class StudentRepository {
@@ -11,7 +12,7 @@ public class StudentRepository {
     Map<Integer,Student> db = new HashMap<>();
 
     public Student getStudent(int regNo){
-       return db.get(regNo);
+        return db.get(regNo);
     }
 
     public void addStudent(Student student) {
@@ -26,4 +27,5 @@ public class StudentRepository {
         db.get(regNo).setAge(newAge);
         return db.get(regNo);
     }
+
 }

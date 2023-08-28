@@ -10,7 +10,10 @@ public class StudentService {
     StudentRepository studentRepository;
 
     public Student getStudent(int regNo){
-       return studentRepository.getStudent(regNo);
+
+        System.out.println("Repo bean called in service: "+studentRepository);
+        Student student = studentRepository.getStudent(regNo);
+       return student;
     }
 
     public String addStudent(Student student) {
